@@ -7,7 +7,7 @@ import {
   XMarkIcon,
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
-import type { ArchitectureDiagram, AWSService, DiagramElement } from '../types/aws-projects';
+import type { ArchitectureDiagram, AWSService } from '../types/aws-projects';
 
 interface ArchitectureDiagramProps {
   diagram: ArchitectureDiagram;
@@ -29,7 +29,6 @@ interface TouchState {
 
 const ArchitectureDiagram = ({ 
   diagram, 
-  services, 
   onServiceHover,
   className = '' 
 }: ArchitectureDiagramProps) => {
@@ -128,8 +127,8 @@ const ArchitectureDiagram = ({
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
     if (e.touches.length === 2) {
-      const distance = getTouchDistance(e.touches);
-      const center = getTouchCenter(e.touches);
+      const distance = getTouchDistance(e.touches as unknown as TouchList);
+      const center = getTouchCenter(e.touches as unknown as TouchList);
       setTouchState({ lastTouchDistance: distance, lastTouchCenter: center });
     } else if (e.touches.length === 1) {
       setIsDragging(true);
@@ -143,8 +142,8 @@ const ArchitectureDiagram = ({
     
     if (e.touches.length === 2) {
       // Pinch to zoom
-      const distance = getTouchDistance(e.touches);
-      const center = getTouchCenter(e.touches);
+      const distance = getTouchDistance(e.touches as unknown as TouchList);
+      const center = getTouchCenter(e.touches as unknown as TouchList);
       
       if (touchState.lastTouchDistance > 0) {
         const scale = distance / touchState.lastTouchDistance;

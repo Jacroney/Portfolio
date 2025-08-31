@@ -94,7 +94,7 @@ import { validateAWSProject } from '../types/aws-projects';
 awsProjects.forEach((project, index) => {
   if (!validateAWSProject(project)) {
     console.error(`Invalid AWS project data at index ${index}:`, project);
-    throw new Error(`AWS project validation failed for project: ${(project as any).id || 'unknown'}`);
+    throw new Error(`AWS project validation failed for project: ${(project as Record<string, unknown>).id || 'unknown'}`);
   }
 });
 

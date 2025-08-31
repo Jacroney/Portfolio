@@ -56,52 +56,60 @@ export const isValidProjectStatus = (status: string): status is ProjectStatus =>
   return ["live", "development", "archived"].includes(status);
 };
 
-export const validateAWSService = (service: any): service is AWSService => {
+export const validateAWSService = (service: unknown): service is AWSService => {
+  const s = service as Record<string, unknown>;
   return (
     typeof service === 'object' &&
-    typeof service.name === 'string' &&
-    typeof service.icon === 'string' &&
-    typeof service.purpose === 'string' &&
-    (service.configuration === undefined || typeof service.configuration === 'string')
+    service !== null &&
+    typeof s.name === 'string' &&
+    typeof s.icon === 'string' &&
+    typeof s.purpose === 'string' &&
+    (s.configuration === undefined || typeof s.configuration === 'string')
   );
 };
 
-export const validateProjectMetrics = (metrics: any): metrics is ProjectMetrics => {
+export const validateProjectMetrics = (metrics: unknown): metrics is ProjectMetrics => {
+  const m = metrics as Record<string, unknown>;
   return (
     typeof metrics === 'object' &&
-    (metrics.uptime === undefined || typeof metrics.uptime === 'string') &&
-    (metrics.responseTime === undefined || typeof metrics.responseTime === 'string') &&
-    (metrics.monthlyCost === undefined || typeof metrics.monthlyCost === 'string') &&
-    (metrics.usersServed === undefined || typeof metrics.usersServed === 'number')
+    metrics !== null &&
+    (m.uptime === undefined || typeof m.uptime === 'string') &&
+    (m.responseTime === undefined || typeof m.responseTime === 'string') &&
+    (m.monthlyCost === undefined || typeof m.monthlyCost === 'string') &&
+    (m.usersServed === undefined || typeof m.usersServed === 'number')
   );
 };
 
-export const validateArchitectureDiagram = (diagram: any): diagram is ArchitectureDiagram => {
+export const validateArchitectureDiagram = (diagram: unknown): diagram is ArchitectureDiagram => {
+  const d = diagram as Record<string, unknown>;
   return (
     typeof diagram === 'object' &&
-    typeof diagram.imageUrl === 'string' &&
-    (diagram.mermaidCode === undefined || typeof diagram.mermaidCode === 'string') &&
-    (diagram.interactiveElements === undefined || Array.isArray(diagram.interactiveElements))
+    diagram !== null &&
+    typeof d.imageUrl === 'string' &&
+    (d.mermaidCode === undefined || typeof d.mermaidCode === 'string') &&
+    (d.interactiveElements === undefined || Array.isArray(d.interactiveElements))
   );
 };
 
-export const validateAWSProject = (project: any): project is AWSProject => {
+export const validateAWSProject = (project: unknown): project is AWSProject => {
+  const p = project as Record<string, unknown>;
   return (
     typeof project === 'object' &&
-    typeof project.id === 'string' &&
-    typeof project.title === 'string' &&
-    typeof project.description === 'string' &&
-    typeof project.businessProblem === 'string' &&
-    typeof project.technicalSolution === 'string' &&
-    Array.isArray(project.awsServices) &&
-    project.awsServices.every(validateAWSService) &&
-    validateArchitectureDiagram(project.architectureDiagram) &&
-    validateProjectMetrics(project.metrics) &&
-    Array.isArray(project.technologies) &&
-    project.technologies.every((tech: any) => typeof tech === 'string') &&
-    (project.demoUrl === undefined || typeof project.demoUrl === 'string') &&
-    typeof project.codeUrl === 'string' &&
-    (project.infrastructureUrl === undefined || typeof project.infrastructureUrl === 'string') &&
-    isValidProjectStatus(project.status)
+    project !== null &&
+    typeof p.id === 'string' &&
+    typeof p.title === 'string' &&
+    typeof p.description === 'string' &&
+    typeof p.businessProblem === 'string' &&
+    typeof p.technicalSolution === 'string' &&
+    Array.isArray(p.awsServices) &&
+    (p.awsServices as unknown[]).every(validateAWSService) &&
+    validateArchitectureDiagram(p.architectureDiagram) &&
+    validateProjectMetrics(p.metrics) &&
+    Array.isArray(p.technologies) &&
+    (p.technologies as unknown[]).every((tech: unknown) => typeof tech === 'string') &&
+    (p.demoUrl === undefined || typeof p.demoUrl === 'string') &&
+    typeof p.codeUrl === 'string' &&
+    (p.infrastructureUrl === undefined || typeof p.infrastructureUrl === 'string') &&
+    isValidProjectStatus(p.status as string)
   );
 };

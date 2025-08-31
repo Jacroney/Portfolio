@@ -1,9 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-interface PerformanceMetrics {
-  renderTime: number;
-  componentName: string;
-}
 
 export const usePerformance = (componentName: string) => {
   const startTimeRef = useRef<number>(0);
@@ -19,7 +15,7 @@ export const usePerformance = (componentName: string) => {
     const renderTime = endTime - startTimeRef.current;
     
     // Only log in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.log(`[Performance] ${componentName} render #${renderCountRef.current}: ${renderTime.toFixed(2)}ms`);
       
       // Warn about slow renders
@@ -29,7 +25,7 @@ export const usePerformance = (componentName: string) => {
     }
 
     // Report to performance monitoring service in production
-    if (process.env.NODE_ENV === 'production' && renderTime > 100) {
+    if (import.meta.env.PROD && renderTime > 100) {
       // This would integrate with a real monitoring service
       console.warn(`Slow render detected: ${componentName} - ${renderTime.toFixed(2)}ms`);
     }

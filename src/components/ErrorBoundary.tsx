@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { ExclamationTriangleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 interface Props {
@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<Props, State> {
           <p className="text-sm text-red-700 mb-4">
             We encountered an error while loading this component. This might be a temporary issue.
           </p>
-          {process.env.NODE_ENV === 'development' && this.state.error && (
+          {import.meta.env.DEV && this.state.error && (
             <details className="text-left bg-red-100 border border-red-300 rounded p-3 mb-4">
               <summary className="cursor-pointer font-medium text-red-800 mb-2">
                 Error Details (Development)

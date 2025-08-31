@@ -50,7 +50,7 @@ const AWSProjectCard = memo(({ project }: AWSProjectCardProps) => {
       try {
         window.open(url, '_blank', 'noopener,noreferrer');
         setLinkStates(prev => ({ ...prev, [linkType]: 'idle' }));
-      } catch (error) {
+      } catch {
         setLinkStates(prev => ({ ...prev, [linkType]: 'error' }));
         setTimeout(() => {
           setLinkStates(prev => ({ ...prev, [linkType]: 'idle' }));
@@ -150,8 +150,6 @@ const AWSProjectCard = memo(({ project }: AWSProjectCardProps) => {
                 className="inline-flex items-center gap-1 px-2 py-1 bg-orange-50 text-orange-700 rounded text-xs font-medium border border-orange-200 hover:bg-orange-100 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-1"
                 onMouseEnter={(e) => handleServiceHover(service, e)}
                 onMouseLeave={() => handleServiceHover(null)}
-                onFocus={(e) => handleServiceHover(service, e)}
-                onBlur={() => handleServiceHover(null)}
                 aria-label={`${service.name}: ${service.purpose}`}
               >
                 <img 
@@ -302,8 +300,6 @@ const AWSProjectCard = memo(({ project }: AWSProjectCardProps) => {
                       className="bg-orange-50 border border-orange-200 rounded-lg p-3 hover:bg-orange-100 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-1"
                       onMouseEnter={(e) => handleServiceHover(service, e)}
                       onMouseLeave={() => handleServiceHover(null)}
-                      onFocus={(e) => handleServiceHover(service, e)}
-                      onBlur={() => handleServiceHover(null)}
                       aria-label={`${service.name}: ${service.purpose}`}
                     >
                       <div className="flex items-center gap-2 mb-2">

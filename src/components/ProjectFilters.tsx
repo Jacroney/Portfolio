@@ -25,11 +25,6 @@ const ProjectFilters = memo(({
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
 
-  // Hide filters if only one project
-  if (projects.length < 2) {
-    return null;
-  }
-
   // Memoize expensive calculations
   const allServices = useMemo(() => 
     Array.from(
@@ -90,6 +85,11 @@ const ProjectFilters = memo(({
     const newUrl = params.toString() ? `${window.location.pathname}?${params}` : window.location.pathname;
     window.history.replaceState({}, '', newUrl);
   }, [filters]);
+
+  // Hide filters if only one project
+  if (projects.length < 2) {
+    return null;
+  }
 
   return (
     <div className={`bg-white border border-gray-200 rounded-lg shadow-sm ${className}`}>

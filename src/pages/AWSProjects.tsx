@@ -78,7 +78,7 @@ const AWSProjects = () => {
     }
 
     return filtered;
-  }, [filters]);
+  }, [filters, validProjects]);
 
   return (
     <div className="min-h-screen bg-gray-50">

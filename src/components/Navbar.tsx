@@ -36,7 +36,7 @@ const Navbar = () => {
             ))}
             {/* LinkedIn Icon */}
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/joe-croney"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 transition-colors"
@@ -87,7 +87,7 @@ const Navbar = () => {
             </Link>
           ))}
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/joe-croney"
             target="_blank"
             rel="noopener noreferrer"
             className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"

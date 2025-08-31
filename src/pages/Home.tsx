@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Bandon from '/Bandon.jpeg';
 
 const Home = () => {
@@ -55,20 +56,24 @@ const Home = () => {
                 Computer Science student at Cal Poly specializing in artificial intelligence, machine learning, and systems programming.
                 </p>
                 <div className="flex space-x-4 pt-4">
-                  <motion.button 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    View My Work
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
-                  >
-                    Contact Me
-                  </motion.button>
+                  <Link to="/projects">
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      View My Work
+                    </motion.button>
+                  </Link>
+                  <Link to="/contact">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
+                    >
+                      Contact Me
+                    </motion.button>
+                  </Link>
                 </div>
               </motion.div>
             </div>

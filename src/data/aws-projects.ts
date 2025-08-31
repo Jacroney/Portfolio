@@ -58,7 +58,7 @@ export const awsProjects: AWSProject[] = [
       usersServed: 150,
     },
     technologies: ["React", "TypeScript", "Node.js", "AWS SDK", "Serverless Framework"],
-    demoUrl: "https://college-hq.example.com",
+    demoUrl: "https://github.com/Jacroney/college-hq#demo",
     codeUrl: "https://github.com/Jacroney/college-hq",
     infrastructureUrl: "https://github.com/Jacroney/college-hq-infrastructure",
     status: "live",

@@ -9,7 +9,7 @@ const projects = [
     description:
       'A full-stack platform designed to help students manage their academic and social lives. Includes registration tools, class planners, and AI agents for smarter course decisions.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'AWS Lambda'],
-    demoUrl: '#', // Add real link if hosted
+    demoUrl: 'https://github.com/Jacroney/college-hq#readme',
     codeUrl: 'https://github.com/Jacroney/college-hq',
     image: '/project-placeholder-1.jpg' // Replace with actual image if you have one
   },
@@ -19,7 +19,7 @@ const projects = [
     description:
       'A finance dashboard for Greek organizations. Tracks dues, manages budgets, and automates reports — built for Kappa Sigma at Cal Poly to simplify house finances.',
     technologies: ['Node.js', 'Express', 'MongoDB', 'React'],
-    demoUrl: '#', // Add real link if hosted
+    demoUrl: 'https://github.com/Jacroney/fraternity-money-manager#readme',
     codeUrl: 'https://github.com/Jacroney/fraternity-money-manager',
     image: '/project-placeholder-2.jpg'
   },
@@ -81,24 +81,26 @@ const Projects = () => {
                     ))}
                   </div>
                   <div className="flex space-x-4 pt-2">
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-                    >
-                      <EyeIcon className="w-5 h-5" />
-                      Live Demo
-                    </motion.a>
+                    {project.demoUrl && (
+                      <motion.a
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                      >
+                        <EyeIcon className="w-5 h-5" />
+                        View Project
+                      </motion.a>
+                    )}
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       href={project.codeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 bg-transparent border border-gray-600 text-gray-300 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-colors"
+                      className={`${project.demoUrl ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 bg-transparent border border-gray-600 text-gray-300 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition-colors`}
                     >
                       <CodeBracketIcon className="w-5 h-5" />
                       Code

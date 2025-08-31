@@ -3,11 +3,11 @@ import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 const Resume = () => {
   const handleDownload = () => {
-    // Replace with your actual resume file path in the public folder
-    const resumeUrl = '/resume.pdf';
+    // Using your actual resume file
+    const resumeUrl = '/Joseph Croney - Generic Resume.pdf';
     const link = document.createElement('a');
     link.href = resumeUrl;
-    link.download = 'Joe_Croney_Resume.pdf';
+    link.download = 'Joseph Croney - Generic Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

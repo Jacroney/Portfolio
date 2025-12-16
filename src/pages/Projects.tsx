@@ -3,21 +3,21 @@ import { CodeBracketIcon } from '@heroicons/react/24/outline';
 const projects = [
   {
     id: 1,
+    title: 'Greek Pay LLC',
+    description:
+      'A finance dashboard for Greek organizations. Tracks dues, manages budgets, and automates reports for Kappa Sigma at Cal Poly.',
+    technologies: ['Node.js', 'Express', 'MongoDB', 'React'],
+    demoUrl: 'https://greekpay.org',
+    codeUrl: 'https://github.com/Jacroney/FMM',
+  },
+  {
+    id: 2,
     title: 'College HQ',
     description:
       'A full-stack platform designed to help students manage their academic and social lives. Includes registration tools, class planners, and AI agents for smarter course decisions.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'AWS Lambda'],
     demoUrl: 'https://github.com/Jacroney/college-hq#readme',
-    codeUrl: 'https://github.com/Jacroney/college-hq',
-  },
-  {
-    id: 2,
-    title: 'Fraternity Money Manager',
-    description:
-      'A finance dashboard for Greek organizations. Tracks dues, manages budgets, and automates reports for Kappa Sigma at Cal Poly.',
-    technologies: ['Node.js', 'Express', 'MongoDB', 'React'],
-    demoUrl: 'https://github.com/Jacroney/fraternity-money-manager#readme',
-    codeUrl: 'https://github.com/Jacroney/fraternity-money-manager',
+    codeUrl: 'https://github.com/Jacroney/College-HQ',
   },
   {
     id: 3,

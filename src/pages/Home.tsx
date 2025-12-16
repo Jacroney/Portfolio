@@ -42,7 +42,7 @@ const Home = () => {
                 Get in Touch
               </Link>
               <a
-                href="/Joseph Croney - Generic Resume.pdf"
+                href="/Joseph Croney Resume.pdf"
                 download
                 className="px-6 py-3 text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >

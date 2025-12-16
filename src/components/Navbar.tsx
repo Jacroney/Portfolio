@@ -38,7 +38,7 @@ const Navbar = () => {
               </Link>
             ))}
             <a
-              href="https://www.linkedin.com/in/joseph-croney-833202356/"
+              href="https://www.linkedin.com/in/joseph-croney/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-900 transition-colors"
@@ -86,7 +86,7 @@ const Navbar = () => {
               </Link>
             ))}
             <a
-              href="https://www.linkedin.com/in/joseph-croney-833202356/"
+              href="https://www.linkedin.com/in/joseph-croney/"
               target="_blank"
               rel="noopener noreferrer"
               className="block py-2 text-gray-500 hover:text-gray-900"

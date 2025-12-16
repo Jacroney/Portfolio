@@ -6,7 +6,7 @@ const projects = [
     title: 'Greek Pay LLC',
     description:
       'A finance dashboard for Greek organizations. Tracks dues, manages budgets, and automates reports for Kappa Sigma at Cal Poly.',
-    technologies: ['Node.js', 'Express', 'MongoDB', 'React'],
+    technologies: ['Node.js', 'Express', 'MongoDB', 'React', 'Supabase', 'Stripe'],
     demoUrl: 'https://greekpay.org',
     codeUrl: 'https://github.com/Jacroney/FMM',
   },

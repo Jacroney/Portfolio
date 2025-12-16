@@ -1,165 +1,120 @@
-import { motion } from 'framer-motion';
 import { useState } from 'react';
+import type { FormEvent, ChangeEvent } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Here you would typically send the form data to your backend
-    // For now, we'll simulate a successful submission
+    setStatus('submitting');
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSubmitStatus({
-        success: true,
-        message: 'Thank you for your message! I\'ll get back to you soon.'
-      });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
     } catch {
-      setSubmitStatus({
-        success: false,
-        message: 'Something went wrong. Please try again later.'
-      });
-    } finally {
-      setIsSubmitting(false);
+      setStatus('error');
     }
   };
 
   return (
-    <div className="h-screen w-screen overflow-auto p-0 m-0 bg-gradient-to-br from-gray-900 to-gray-800">
-      <div className="fixed top-0 left-0 w-full h-full overflow-y-auto">
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Get In Touch
-            </h1>
-            <div className="h-1 w-24 bg-blue-500 mb-8 mx-auto rounded-full"></div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.
-            </p>
-          </motion.div>
+    <div className="min-h-screen pt-24 pb-16">
+      <div className="max-w-xl mx-auto px-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Contact</h1>
+        <p className="text-gray-500 mb-8">
+          Have a question or want to connect? Send me a message.
+        </p>
 
-          <div className="max-w-3xl mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 p-8 md:p-10">
-            {submitStatus ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`p-8 rounded-lg text-center ${
-                  submitStatus.success ? 'bg-green-500/10 border border-green-500/30 text-green-300' : 'bg-red-500/10 border border-red-500/30 text-red-300'
-                }`}
-              >
-                <div className="text-5xl mb-6">
-                  {submitStatus.success ? '✓' : '!'}
-                </div>
-                <p className="text-xl font-medium mb-6">{submitStatus.message}</p>
-                {submitStatus.success && (
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => setSubmitStatus(null)}
-                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-                  >
-                    Send Another Message
-                  </motion.button>
-                )}
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
-                    placeholder="Your message here..."
-                  />
-                </div>
-
-                <div className="pt-2">
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full py-3 px-6 rounded-lg text-base font-medium text-white ${
-                      isSubmitting 
-                        ? 'bg-blue-700 cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700'
-                    } transition-all duration-200`}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </motion.button>
-                </div>
-              </form>
-            )}
+        {status === 'success' ? (
+          <div className="bg-gray-50 rounded-lg p-8 text-center">
+            <p className="text-gray-900 font-medium mb-2">Message sent!</p>
+            <p className="text-gray-500 mb-6">I'll get back to you soon.</p>
+            <button
+              onClick={() => setStatus('idle')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Send another message
+            </button>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-shadow"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-shadow"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none transition-shadow"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={status === 'submitting'}
+              className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-400 transition-colors"
+            >
+              {status === 'submitting' ? 'Sending...' : 'Send Message'}
+            </button>
+          </form>
+        )}
+
+        <div className="mt-12 pt-8 border-t border-gray-100">
+          <p className="text-gray-500 text-sm">
+            Or reach me on{' '}
+            <a
+              href="https://www.linkedin.com/in/joseph-croney-833202356/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 hover:underline"
+            >
+              LinkedIn
+            </a>
+          </p>
         </div>
       </div>
     </div>

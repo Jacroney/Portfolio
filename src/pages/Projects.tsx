@@ -27,6 +27,15 @@ const projects = [
     technologies: ['C', 'POSIX', 'Unix System Calls'],
     codeUrl: 'https://github.com/Jacroney/C-Terminal-Emulator',
   },
+  {
+    id: 4,
+    title: 'Greek Budget Copilot',
+    description:
+      'AI-powered budget management tool for fraternity treasurers. Set budget parameters and chat with an AI assistant for what-if financial analysis, powered by Cloudflare Workers AI.',
+    technologies: ['TypeScript', 'Cloudflare Workers', 'Durable Objects', 'Workers AI'],
+    demoUrl: 'https://e497e243.cf-ai-greek-pay-agent.pages.dev/',
+    codeUrl: 'https://github.com/Jacroney/cf_ai_greek_pay_agent',
+  },
 ];
 
 const Projects = () => {

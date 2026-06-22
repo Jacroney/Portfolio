@@ -1,12 +1,22 @@
 import { CodeBracketIcon } from '@heroicons/react/24/outline';
+import Seo from '../components/Seo';
 
 const projects = [
   {
     id: 1,
-    title: 'Greek Pay LLC',
+    title: 'GreekPay',
     description:
-      'A finance dashboard for Greek organizations. Tracks dues, manages budgets, and automates reports for Kappa Sigma at Cal Poly.',
-    technologies: ['Node.js', 'Express', 'MongoDB', 'React', 'Supabase', 'Stripe'],
+      'A production multi-tenant SaaS financial platform for fraternity chapters, used by real organizations. Handles dues, budgets, and reporting alongside Stripe Connect payments, installment plans with autopay, Plaid bank sync, reimbursements with AI receipt verification, and a Claude-powered advisor that can execute financial actions with treasurer approval.',
+    technologies: [
+      'React',
+      'TypeScript',
+      'Supabase',
+      'Deno Edge Functions',
+      'Stripe Connect',
+      'Plaid',
+      'Claude AI',
+      'Cloudflare Workers',
+    ],
     demoUrl: 'https://greekpay.org',
     codeUrl: 'https://github.com/Jacroney/FMM',
   },
@@ -41,6 +51,10 @@ const projects = [
 const Projects = () => {
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <Seo
+        title="Projects"
+        description="Selected software projects by Joe Croney — finance dashboards, AI tools, and systems programming."
+      />
       <div className="max-w-3xl mx-auto px-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Projects</h1>
         <p className="text-gray-500 mb-12">

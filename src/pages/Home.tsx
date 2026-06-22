@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 const Home = () => {
   return (
     <div className="min-h-screen relative">
+      <Seo title="Joe Croney" />
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joe Croney</title>
+    <link>https://josephcroney.com/blog</link>
+    <description>Notes on software, systems, and the things I build.</description>
+    <language>en-us</language>
+    <atom:link href="https://josephcroney.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building GreekPay</title>
+      <link>https://josephcroney.com/blog/building-greek-pay</link>
+      <guid>https://josephcroney.com/blog/building-greek-pay</guid>
+      <description>What started as a weekend spreadsheet-killer is now a production SaaS handling payments, banking, and an AI advisor for real fraternity chapters.</description>
+      <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Writing a File System in C</title>
+      <link>https://josephcroney.com/blog/writing-a-file-system-in-c</link>
+      <guid>https://josephcroney.com/blog/writing-a-file-system-in-c</guid>
+      <description>Notes from building a Unix-like file system emulator with inodes and directories for CSC 357.</description>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

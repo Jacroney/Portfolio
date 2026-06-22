@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
+import Seo from '../components/Seo';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,10 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <Seo
+        title="Contact"
+        description="Get in touch with Joe Croney."
+      />
       <div className="max-w-xl mx-auto px-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Contact</h1>
         <p className="text-gray-500 mb-8">

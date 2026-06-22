@@ -1,8 +1,14 @@
+import Seo from '../components/Seo';
+
 const About = () => {
   const skills = ['React', 'TypeScript', 'Node.js', 'Python', 'Java', 'C', 'Git', 'AWS'];
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <Seo
+        title="About"
+        description="About Joe Croney — Computer Science student at Cal Poly SLO interested in AI, machine learning, and systems programming."
+      />
       <div className="max-w-3xl mx-auto px-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">About</h1>
 

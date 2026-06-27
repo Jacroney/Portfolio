@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers static-asset deployment for the portfolio SPA.
+  // No Worker script (`main`) is needed — the site is fully static and the
+  // contact form uses a mailto: link, so Cloudflare serves the built `dist/`
+  // directly. See https://developers.cloudflare.com/workers/static-assets/
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joe-croney-portfolio",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown routes (200) so client-side routing works
+    // for /projects, /blog/:slug, etc.
+    "not_found_handling": "single-page-application"
+  }
+}

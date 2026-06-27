@@ -1,124 +1,103 @@
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
+import { Button, Input, InputArea, Link, LayerCard } from '@cloudflare/kumo';
+import { PaperPlaneTilt } from '@phosphor-icons/react';
 import Seo from '../components/Seo';
+import { Reveal } from '../components/Motion';
+
+const CONTACT_EMAIL = 'joe@greekpay.org';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'success'>('idle');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setStatus('submitting');
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    } catch {
-      setStatus('error');
-    }
+    const subject = `Portfolio message from ${formData.name}`;
+    const body = `${formData.message}\n\n— ${formData.name} (${formData.email})`;
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+    // Open the visitor's email client with the message pre-filled.
+    window.location.href = mailto;
+    setStatus('success');
   };
 
   return (
     <div className="min-h-screen pt-24 pb-16">
-      <Seo
-        title="Contact"
-        description="Get in touch with Joe Croney."
-      />
+      <Seo title="Contact" description="Get in touch with Joe Croney." />
       <div className="max-w-xl mx-auto px-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Contact</h1>
-        <p className="text-gray-500 mb-8">
-          Have a question or want to connect? Send me a message.
-        </p>
+        <Reveal>
+          <h1 className="text-3xl font-bold text-kumo-strong mb-2">Contact</h1>
+          <p className="text-kumo-subtle mb-8">
+            Have a question or want to connect? Send me a message.
+          </p>
+        </Reveal>
 
-        {status === 'success' ? (
-          <div className="bg-gray-50 rounded-lg p-8 text-center">
-            <p className="text-gray-900 font-medium mb-2">Message sent!</p>
-            <p className="text-gray-500 mb-6">I'll get back to you soon.</p>
-            <button
-              onClick={() => setStatus('idle')}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Send another message
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
+        <Reveal delay={0.05}>
+          {status === 'success' ? (
+            <LayerCard>
+              <LayerCard.Primary className="text-center py-4">
+                <p className="text-kumo-strong font-medium mb-2">Your email is ready to send.</p>
+                <p className="text-kumo-subtle mb-6">
+                  Your mail app should have opened with the message pre-filled. If it
+                  didn't, email me directly at{' '}
+                  <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>.
+                </p>
+                <Button variant="secondary" onClick={() => setStatus('idle')}>
+                  Write another message
+                </Button>
+              </LayerCard.Primary>
+            </LayerCard>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <Input
+                label="Name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-shadow"
               />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
+              <Input
+                label="Email"
                 type="email"
-                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-shadow"
               />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
+              <InputArea
+                label="Message"
                 name="message"
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none transition-shadow"
               />
-            </div>
+              <Button type="submit" variant="primary" size="lg" icon={PaperPlaneTilt} className="w-full">
+                Send Message
+              </Button>
+            </form>
+          )}
+        </Reveal>
 
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-400 transition-colors"
-            >
-              {status === 'submitting' ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
-        )}
-
-        <div className="mt-12 pt-8 border-t border-gray-100">
-          <p className="text-gray-500 text-sm">
-            Or reach me on{' '}
-            <a
-              href="https://www.linkedin.com/in/joseph-croney-833202356/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-900 hover:underline"
-            >
+        <div className="mt-12 pt-8 border-t border-kumo-line">
+          <p className="text-kumo-subtle text-sm">
+            Or reach me directly at{' '}
+            <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>,{' '}
+            <Link href="https://www.linkedin.com/in/joseph-croney/" target="_blank" rel="noopener noreferrer">
               LinkedIn
-            </a>
+            </Link>
+            , or{' '}
+            <Link href="https://github.com/Jacroney" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </Link>
+            .
           </p>
         </div>
       </div>

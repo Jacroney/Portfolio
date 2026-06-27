@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GithubLogo, LinkedinLogo, List, X } from '@phosphor-icons/react';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -76,6 +77,7 @@ const Navbar = () => {
                 <Icon size={20} weight="fill" />
               </a>
             ))}
+            <ThemeToggle className="ml-1" />
           </div>
 
           {/* Mobile menu button */}
@@ -128,6 +130,8 @@ const Navbar = () => {
                     <Icon size={22} weight="fill" />
                   </a>
                 ))}
+                <span className="mx-1 h-5 w-px bg-kumo-line" />
+                <ThemeToggle />
               </div>
             </div>
           </motion.div>

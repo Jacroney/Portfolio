@@ -1,8 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME = 'Joe Croney';
+const SITE_URL = 'https://josephcroney.com';
 const DEFAULT_DESCRIPTION =
   'Joe Croney — Computer Science student at Cal Poly SLO, focused on AI, machine learning, and systems programming.';
+const DEFAULT_IMAGE = `${SITE_URL}/og.png`;
 
 interface SeoProps {
   title: string;
@@ -14,7 +16,7 @@ interface SeoProps {
 const Seo = ({
   title,
   description = DEFAULT_DESCRIPTION,
-  image,
+  image = DEFAULT_IMAGE,
   type = 'website',
 }: SeoProps) => {
   const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;

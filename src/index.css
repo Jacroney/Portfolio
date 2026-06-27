@@ -1,16 +1,25 @@
-/* Syntax highlighting theme for blog code blocks */
+/*
+ * Tailwind v4 + Cloudflare Kumo design system.
+ * Import order matters: Kumo's @theme tokens must register before Tailwind
+ * so its `kumo-*` color/utility classes resolve. The @source directive lets
+ * Tailwind discover the utility classes used inside Kumo's compiled components
+ * (Tailwind v4 does not scan node_modules by default).
+ */
+@source "../node_modules/@cloudflare/kumo/dist/**/*.{js,jsx,ts,tsx}";
+@import "@cloudflare/kumo/styles/tailwind";
+@import "tailwindcss";
+/* Code-block syntax highlighting for the blog */
 @import 'highlight.js/styles/github.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 :root {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Auto light/dark — Kumo tokens are defined with light-dark(), so this
+     makes the whole site follow the visitor's system preference. */
+  color-scheme: light dark;
+
+  font-family: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   font-weight: 400;
-  color: #111827;
-  background-color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,14 +29,54 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: var(--color-kumo-canvas);
+  color: var(--text-color-kumo-default);
 }
 
 *:focus-visible {
-  outline: 2px solid #111827;
+  outline: 2px solid var(--color-kumo-brand);
   outline-offset: 2px;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Blog code blocks: let the Kumo surface (prose-pre) show through and only
+   tint the syntax tokens, so highlighting works in both light and dark mode. */
+.hljs {
+  background: transparent;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hljs { color: #e6edf3; }
+  .hljs-comment,
+  .hljs-quote { color: #8b949e; }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in,
+  .hljs-deletion { color: #ff7b72; }
+  .hljs-string,
+  .hljs-attr,
+  .hljs-addition { color: #a5d6ff; }
+  .hljs-title,
+  .hljs-section,
+  .hljs-name { color: #d2a8ff; }
+  .hljs-number,
+  .hljs-literal,
+  .hljs-type { color: #79c0ff; }
+}
+
+/* Respect users who prefer reduced motion — disable all the framer-motion flourishes. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -59,7 +59,7 @@ class ErrorBoundary extends Component<Props, State> {
               </pre>
             </details>
           )}
-          <Button variant="danger" onClick={this.handleRetry} icon={ArrowClockwise}>
+          <Button variant="destructive" onClick={this.handleRetry} icon={ArrowClockwise}>
             Try Again
           </Button>
         </div>
